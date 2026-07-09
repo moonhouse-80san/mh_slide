@@ -223,8 +223,10 @@ function getMhSlide() {
 	if ($node.is('img') && $node.attr('editor_component') == 'mh_slide') {
 		selected_node = node;
 
-		get_by_id('width').value = $node.attr('mh_width') || 800;
-		get_by_id('height').value = $node.attr('mh_height') || 460;
+		var attr_width = $node.attr('mh_width');
+		var attr_height = $node.attr('mh_height');
+		get_by_id('width').value = (typeof attr_width !== 'undefined') ? attr_width : 800;
+		get_by_id('height').value = (typeof attr_height !== 'undefined') ? attr_height : 460;
 		get_by_id('auto_play').checked = ($node.attr('auto_play') != 'N');
 		get_by_id('random_effect').checked = ($node.attr('random_effect') != 'N');
 		get_by_id('ascending_order').checked = ($node.attr('ascending_order') != 'N');
@@ -292,8 +294,12 @@ function insertMhSlide() {
 	effect_list = effect_list.replace(/,$/, '');
 	if (!effect_list) effect_list = "fade";
 
-	var width = get_by_id("width").value || 800;
-	var height = get_by_id("height").value || 460;
+	var width = get_by_id("width").value.trim();
+	var height = get_by_id("height").value.trim();
+	if (!width && !height) {
+		alert('가로 또는 세로 중 하나는 입력해주세요.');
+		return;
+	}
 	var auto_play = get_by_id("auto_play").checked ? "Y" : "N";
 	var random_effect = get_by_id("random_effect").checked ? "Y" : "N";
 	var ascending_order = get_by_id("ascending_order").checked ? "Y" : "N";
@@ -311,6 +317,14 @@ function insertMhSlide() {
 
 	var slides_json = JSON.stringify(slides);
 
+	// 에디터 작성화면 미리보기 박스 크기(실제 저장되는 mh_width/mh_height 속성과는 별개, 화면표시용 추정치)
+	var preview_width = parseInt(width, 10) || 0;
+	var preview_height = parseInt(height, 10) || 0;
+	if (!preview_width && preview_height) preview_width = Math.round(preview_height * 1.6);
+	if (!preview_height && preview_width) preview_height = Math.round(preview_width * 0.6);
+	if (!preview_width) preview_width = 800;
+	if (!preview_height) preview_height = 460;
+
 	if (selected_node) {
 		selected_node.setAttribute("mh_width", width);
 		selected_node.setAttribute("mh_height", height);
@@ -325,8 +339,8 @@ function insertMhSlide() {
 		selected_node.removeAttribute("images_list");
 		selected_node.setAttribute("mh_align", align);
 		selected_node.setAttribute("src", slides[0].src);
-		selected_node.style.width = width + "px";
-		selected_node.style.height = height + "px";
+		selected_node.style.width = preview_width + "px";
+		selected_node.style.height = preview_height + "px";
 		selected_node.style.display = "block";
 		selected_node.style.marginLeft = (align == "left") ? "0" : "auto";
 		selected_node.style.marginRight = (align == "right") ? "0" : "auto";
@@ -339,7 +353,7 @@ function insertMhSlide() {
 			+ " auto_play=\"" + auto_play + "\" random_effect=\"" + random_effect + "\" ascending_order=\"" + ascending_order + "\" show_thumbs=\"" + show_thumbs + "\""
 			+ " duration=\"" + duration + "\" speed=\"" + speed + "\" effects=\"" + effect_list + "\""
 			+ " mh_slides=\"" + escapeAttr(slides_json) + "\" mh_align=\"" + align + "\""
-			+ " style=\"display:block;width:" + width + "px;height:" + height + "px;border:2px dotted #4371B9;"
+			+ " style=\"display:block;width:" + preview_width + "px;height:" + preview_height + "px;border:2px dotted #4371B9;"
 			+ align_style + "object-fit:cover;\" />";
 		opener.editorFocus(opener.editorPrevSrl);
 		var iframe_obj = opener.editorGetIFrame(opener.editorPrevSrl);

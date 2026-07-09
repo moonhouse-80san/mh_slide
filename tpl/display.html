@@ -2,6 +2,8 @@
 <load target="mh_slide.css" />
 
 <style>
+#mh_slide_outer_{$slide_info->srl} .vui-item img { object-fit:{$slide_info->object_fit} !important; }
+#mh_slide_outer_{$slide_info->srl} .vui-item { background:transparent; }
 @media (max-width:640px){
 	#mh_slide_outer_{$slide_info->srl}{width:100% !important;max-width:100% !important;}
 	#mh_slide_outer_{$slide_info->srl} .mh_slide_wrap{width:100% !important;height:auto !important;aspect-ratio:{$slide_info->width} / {$slide_info->height} !important;}
@@ -48,7 +50,8 @@ jQuery(function($){
 		ie6Tidy: false,
 		random: {$slide_info->random_effect_js},
 		duration: {$slide_info->duration},
-		speed: {$slide_info->speed}
+		speed: {$slide_info->speed},
+		containMode: {$slide_info->contain_mode_js}
 	});
 
 	// 썸네일 클릭 시 해당 슬라이드로 이동 (플러그인이 만든 dot 버튼을 대신 클릭시켜서 이동)

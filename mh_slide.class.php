@@ -46,12 +46,6 @@ class mh_slide extends EditorHandler
 		$slide_info = new stdClass();
 		$slide_info->srl = rand(111111, 999999);
 
-		$slide_info->width = (int)$xml_obj->attrs->mh_width;
-		if (!$slide_info->width) $slide_info->width = 800;
-
-		$slide_info->height = (int)$xml_obj->attrs->mh_height;
-		if (!$slide_info->height) $slide_info->height = 460;
-
 		$slide_info->auto_play_js = ($xml_obj->attrs->auto_play === 'N') ? 'false' : 'true';
 		$slide_info->show_thumbs = ($xml_obj->attrs->show_thumbs === 'N') ? false : true;
 		$slide_info->random_effect_js = ($xml_obj->attrs->random_effect === 'N') ? 'false' : 'true';
@@ -135,6 +129,57 @@ class mh_slide extends EditorHandler
 			return implode('<br />', $output);
 		}
 
+		// 가로/세로 크기 계산: 둘 다 입력되어 있으면 그 크기 그대로(늘려서 채움),
+		// 하나만 입력되어 있으면 실제 이미지 비율로 나머지 값을 자동 계산(찌그러짐 없이 표시)
+		$raw_width = trim((string)$xml_obj->attrs->mh_width);
+		$raw_height = trim((string)$xml_obj->attrs->mh_height);
+		$given_width = ($raw_width !== '' && (int)$raw_width > 0) ? (int)$raw_width : null;
+		$given_height = ($raw_height !== '' && (int)$raw_height > 0) ? (int)$raw_height : null;
+
+		if ($given_width === null && $given_height === null)
+		{
+			// 아무 것도 입력 안 되어 있으면 기존 기본값
+			$given_width = 800;
+			$given_height = 460;
+		}
+
+		if ($given_width !== null && $given_height === null)
+		{
+			// 가로만 지정 → 세로는 실제 이미지 비율대로 자동 계산 (가장 큰 값 기준)
+			$max_height = 0;
+			foreach ($slide_info->slides as $slide)
+			{
+				$size = $this->_getImageSize($slide->src);
+				$calc_height = $size ? round($size[1] * ($given_width / $size[0])) : round($given_width * 0.6);
+				if ($calc_height > $max_height) $max_height = $calc_height;
+			}
+			$slide_info->width = $given_width;
+			$slide_info->height = $max_height ? $max_height : round($given_width * 0.6);
+			$slide_info->object_fit = 'contain';
+		}
+		elseif ($given_height !== null && $given_width === null)
+		{
+			// 세로만 지정 → 가로는 실제 이미지 비율대로 자동 계산 (가장 큰 값 기준)
+			$max_width = 0;
+			foreach ($slide_info->slides as $slide)
+			{
+				$size = $this->_getImageSize($slide->src);
+				$calc_width = $size ? round($size[0] * ($given_height / $size[1])) : round($given_height * 1.6);
+				if ($calc_width > $max_width) $max_width = $calc_width;
+			}
+			$slide_info->width = $max_width ? $max_width : round($given_height * 1.6);
+			$slide_info->height = $given_height;
+			$slide_info->object_fit = 'contain';
+		}
+		else
+		{
+			// 가로/세로 둘 다 지정 → 예전과 동일하게 지정한 크기로 채움
+			$slide_info->width = $given_width;
+			$slide_info->height = $given_height;
+			$slide_info->object_fit = 'fill';
+		}
+		$slide_info->contain_mode_js = ($slide_info->object_fit === 'contain') ? 'true' : 'false';
+
 		Context::set('slide_info', $slide_info);
 
 		$tpl_path = $this->component_path.'tpl';
@@ -143,6 +188,28 @@ class mh_slide extends EditorHandler
 
 		$oTemplate = TemplateHandler::getInstance();
 		return $oTemplate->compile($tpl_path, $tpl_file);
+	}
+
+	/**
+	 * @brief 이미지 파일의 실제 가로/세로 픽셀 크기를 반환 (실패 시 null)
+	 */
+	function _getImageSize($src)
+	{
+		static $cache = array();
+		if (array_key_exists($src, $cache)) return $cache[$src];
+
+		$path = ltrim($src, '/');
+		$size = null;
+		if (is_readable($path))
+		{
+			$info = @getimagesize($path);
+			if ($info && $info[0] > 0 && $info[1] > 0)
+			{
+				$size = array($info[0], $info[1]);
+			}
+		}
+		$cache[$src] = $size;
+		return $size;
 	}
 }
 /* End of file mh_slide.class.php */

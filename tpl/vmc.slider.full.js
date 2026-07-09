@@ -76,7 +76,8 @@
 		ie6Tidy: false,
 		random: false,
 		duration: 4000,
-		speed: 900
+		speed: 900,
+		containMode: false
 	};
 	//**************************************************************************************************************
 	// 初始化
@@ -221,11 +222,20 @@
 			node = the.node,
 			opts = the.options;
 		the.url = node.item.eq(the.index).find('img')[0].src;
-		node.transfer.html(the.stageHtml[stage]).show().children().css({
-			backgroundImage: 'url(' + the.url + ')',
-			backgroundSize: opts.width + 'px ' + opts.height + 'px',
-			backgroundRepeat: 'no-repeat'
-		});
+		if (opts.containMode) {
+			// 가로/세로 자동계산(원본 비율 유지) 모드에서는 배경이미지를 늘려서 그리드를 그리면
+			// 실제 이미지 표시 방식(object-fit:contain)과 어긋나 순간적으로 눌려 보이므로,
+			// 전환효과 중에는 배경을 비워서 다음 이미지로 투명하게(자연스럽게) 넘어가도록 처리
+			node.transfer.html(the.stageHtml[stage]).show().children().css({
+				backgroundImage: 'none'
+			});
+		} else {
+			node.transfer.html(the.stageHtml[stage]).show().children().css({
+				backgroundImage: 'url(' + the.url + ')',
+				backgroundSize: opts.width + 'px ' + opts.height + 'px',
+				backgroundRepeat: 'no-repeat'
+			});
+		}
 	};
 	//**************************************************************************************************************
 	// 上一张
