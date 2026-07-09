@@ -1,0 +1,123 @@
+<load target="./popup.js" />
+<load target="./popup.css" />
+<load target="../lang" />
+
+<div class="x_modal-header">
+	<h1>{$component_info->title} ver. {$component_info->version}</h1>
+	<a class="close_window" href="javascript:window.close()">&times;</a>
+</div>
+
+<div class="x_modal-body">
+	<form action="./" method="get" onSubmit="return false" id="fo">
+	<input type="hidden" name="editor_sequence" value="{$editor_sequence}" />
+	<input type="hidden" id="module_srl" value="{$module_srl}" />
+	<input type="hidden" id="mid" value="{$mid}" />
+
+	<div id="popBody">
+		<table cellspacing="0" class="adminTable">
+			<col width="110" />
+			<col />
+			<col width="110" />
+			<col />
+
+			<!-- 가로 / 세로 -->
+			<tr>
+				<th scope="row">{$lang->width}</th>
+				<td><input type="number" id="width" class="inputTypeText" value="800" style="width:80px" /> px</td>
+				<th scope="row">{$lang->height}</th>
+				<td><input type="number" id="height" class="inputTypeText" value="460" style="width:80px" /> px</td>
+			</tr>
+
+			<!-- 유지시간 / 전환속도 -->
+			<tr>
+				<th scope="row">{$lang->duration}</th>
+				<td><input type="number" id="duration" class="inputTypeText" value="2000" style="width:80px" /></td>
+				<th scope="row">{$lang->speed}</th>
+				<td><input type="number" id="speed" class="inputTypeText" value="1500" style="width:80px" /></td>
+			</tr>
+
+			<!-- 정렬 -->
+			<tr>
+				<th scope="row">{$lang->align}</th>
+				<td colspan="3">
+					<div class="mh_slide_inline_group">
+						<label><input type="radio" name="align" value="left" /> {$lang->align_left}</label>
+						<label><input type="radio" name="align" value="center" checked="checked" /> {$lang->align_center}</label>
+						<label><input type="radio" name="align" value="right" /> {$lang->align_right}</label>
+					</div>
+				</td>
+			</tr>
+
+			<!-- 재생 옵션 -->
+			<tr>
+				<th scope="row">{$lang->slide_option}</th>
+				<td colspan="3">
+					<div class="mh_slide_inline_group">
+						<label><input type="checkbox" id="auto_play" checked="checked" /> {$lang->auto_play}</label>
+						<label><input type="checkbox" id="random_effect" checked="checked" /> {$lang->random_effect}</label>
+						<label><input type="checkbox" id="ascending_order" checked="checked" /> {$lang->ascending_order}</label>
+						<label><input type="checkbox" id="show_thumbs" checked="checked" /> {$lang->show_thumbs}</label>
+					</div>
+				</td>
+			</tr>
+
+			<!-- 전환효과 선택 -->
+			<tr>
+				<th scope="row">{$lang->effect_list}</th>
+				<td colspan="3">
+					<div class="mh_slide_effect_list">
+						<label class="mh_slide_effect_all_row"><input type="checkbox" class="effect_all" onclick="toggleAllEffects(this)" checked="checked" /> <strong>{$lang->effect_all}</strong></label>
+						<div class="mh_slide_inline_group mh_slide_effect_items">
+							<label><input type="checkbox" class="effect_item" value="fade" checked="checked" /> {$lang->effect_fade}</label>
+							<label><input type="checkbox" class="effect_item" value="fadeLeft" checked="checked" /> {$lang->effect_fadeLeft}</label>
+							<label><input type="checkbox" class="effect_item" value="fadeRight" checked="checked" /> {$lang->effect_fadeRight}</label>
+							<label><input type="checkbox" class="effect_item" value="fadeTop" checked="checked" /> {$lang->effect_fadeTop}</label>
+							<label><input type="checkbox" class="effect_item" value="fadeBottom" checked="checked" /> {$lang->effect_fadeBottom}</label>
+							<label><input type="checkbox" class="effect_item" value="fadeTopLeft" checked="checked" /> {$lang->effect_fadeTopLeft}</label>
+							<label><input type="checkbox" class="effect_item" value="fadeBottomRight" checked="checked" /> {$lang->effect_fadeBottomRight}</label>
+							<label><input type="checkbox" class="effect_item" value="blindsLeft" checked="checked" /> {$lang->effect_blindsLeft}</label>
+							<label><input type="checkbox" class="effect_item" value="blindsRight" checked="checked" /> {$lang->effect_blindsRight}</label>
+							<label><input type="checkbox" class="effect_item" value="blindsTop" checked="checked" /> {$lang->effect_blindsTop}</label>
+							<label><input type="checkbox" class="effect_item" value="blindsBottom" checked="checked" /> {$lang->effect_blindsBottom}</label>
+							<label><input type="checkbox" class="effect_item" value="blindsTopLeft" checked="checked" /> {$lang->effect_blindsTopLeft}</label>
+							<label><input type="checkbox" class="effect_item" value="blindsBottomRight" checked="checked" /> {$lang->effect_blindsBottomRight}</label>
+							<label><input type="checkbox" class="effect_item" value="curtainLeft" checked="checked" /> {$lang->effect_curtainLeft}</label>
+							<label><input type="checkbox" class="effect_item" value="curtainRight" checked="checked" /> {$lang->effect_curtainRight}</label>
+							<label><input type="checkbox" class="effect_item" value="interlaceLeft" checked="checked" /> {$lang->effect_interlaceLeft}</label>
+							<label><input type="checkbox" class="effect_item" value="interlaceRight" checked="checked" /> {$lang->effect_interlaceRight}</label>
+							<label><input type="checkbox" class="effect_item" value="mosaic" checked="checked" /> {$lang->effect_mosaic}</label>
+							<label><input type="checkbox" class="effect_item" value="bomb" checked="checked" /> {$lang->effect_bomb}</label>
+							<label><input type="checkbox" class="effect_item" value="fumes" checked="checked" /> {$lang->effect_fumes}</label>
+						</div>
+					</div>
+					<div class="mh_slide_help_text">{$lang->about_effect_list}</div>
+				</td>
+			</tr>
+
+			<!-- 슬라이드 이미지 (항목추가 방식) -->
+			<tr>
+				<th scope="row">{$lang->image_items}</th>
+				<td colspan="3">
+					<button type="button" id="btn-add-item" onclick="addImageItem()">{$lang->add_item}</button>
+					<button type="button" id="btn-add-existing" onclick="toggleExistingPanel()">{$lang->add_existing}</button>
+					<div id="existing-panel" class="mh_slide_existing_panel" style="display:none;">
+						<select id="existing_image_select" size="6" multiple="true" class="mh_slide_existing_select"></select>
+						<button type="button" onclick="addSelectedExisting()">{$lang->add_selected}</button>
+						<div class="mh_slide_help_text">{$lang->about_existing}</div>
+					</div>
+					<div id="item-list" class="mh_slide_item_list"></div>
+					<div class="mh_slide_help_text">{$lang->about_image_items}</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="x_clearfix btnArea">
+		<div class="x_pull-right">
+			<a href="#" onclick="insertMhSlide()"><button type="button" class="x_btn x_btn-primary">{$lang->cmd_insert}</button></a>
+			<a class="x_btn" href="{getUrl('','module','editor','act','dispEditorComponentInfo','component_name',$component_info->component_name)}" target="_blank" onclick="window.open(this.href,'ComponentInfo','width=10,height=10');return false;">{$lang->about_component}</a>
+			<a href="#" onclick="window.close(); return false;"><button type="button" class="x_btn">{$lang->cmd_close}</button></a>
+		</div>
+	</div>
+	</form>
+</div>

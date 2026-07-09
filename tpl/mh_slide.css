@@ -1,0 +1,108 @@
+@charset "utf-8";
+.mh_slide_outer { margin-top:10px; margin-bottom:10px; max-width:100%; }
+.mh_slide_outer.mh_slide_align_left { margin-left:0 !important; margin-right:auto !important; }
+.mh_slide_outer.mh_slide_align_center { margin-left:auto !important; margin-right:auto !important; }
+.mh_slide_outer.mh_slide_align_right { margin-left:auto !important; margin-right:0 !important; }
+
+.mh_slide_wrap { position:relative; overflow:hidden; background:transparent; margin:0; max-width:100%; }
+.mh_slide_wrap .vui-items { overflow:hidden; width:100%; height:100%; }
+.mh_slide_wrap .vui-item { display:none; position:absolute; top:0; left:0; width:100%; height:100%; }
+.mh_slide_wrap .vui-item a {
+	display:block !important;
+	position:relative !important;
+	padding:0 !important;
+	margin:0 !important;
+	border:none !important;
+	width:100% !important;
+	height:100% !important;
+}
+.mh_slide_wrap .vui-item img {
+	display:block !important;
+	padding:0 !important;
+	margin:0 !important;
+	border:none !important;
+	width:100% !important;
+	height:100% !important;
+	max-width:none !important;
+	max-height:none !important;
+	min-width:0 !important;
+	min-height:0 !important;
+	object-fit:fill;
+}
+
+/* 이미지별 캡션 (이미지 하단에 반투명 다크 배경 + 흰 글씨 + 검은 그림자) */
+.mh_slide_wrap .mh_slide_caption {
+	position:absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	z-index:4;
+	box-sizing:border-box;
+	padding:10px 14px;
+	background:linear-gradient(to top, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.45) 55%, rgba(0,0,0,0) 100%);
+	color:#fff;
+	font-size:14px;
+	line-height:1.5;
+	text-shadow:0 1px 2px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.6);
+}
+
+.mh_slide_wrap .vui-buttons { position:absolute; z-index:5; bottom:16px; left:50%; float:left; display:inline; filter:alpha(Opacity=80); -moz-opacity:0.8; opacity:0.8; }
+.mh_slide_wrap .vui-button { float:left; display:inline; overflow:hidden; height:12px; width:12px; margin:0 10px; padding:0; border:none; border-radius:6px; background:#999; cursor:pointer; }
+.mh_slide_wrap .vui-button-cur { background-color:#C00; }
+.mh_slide_wrap .vui-transfer { display:none; position:absolute; top:0; left:0; width:100%; height:100%; z-index:3; }
+.mh_slide_wrap .vui-prev { position:absolute; top:50%; left:0; z-index:5; width:60px; height:150px; margin-top:-75px; border-radius:0 10px 10px 0; background:url(./prev.gif) no-repeat; cursor:pointer; filter:alpha(opacity=30); -moz-opacity:0.3; -khtml-opacity:0.3; opacity:0.3; transition:0.5s ease; -o-transition:0.5s ease; -webkit-transition:0.5s ease; }
+.mh_slide_wrap .vui-next { position:absolute; top:50%; right:0; z-index:5; width:60px; height:150px; margin-top:-75px; border-radius:10px 0 0 10px; background:url(./next.gif) no-repeat; cursor:pointer; filter:alpha(opacity=30); -moz-opacity:0.3; -khtml-opacity:0.3; opacity:0.3; transition:0.5s ease; -o-transition:0.5s ease; -webkit-transition:0.5s ease; }
+.mh_slide_wrap .vui-sidebutton-hover { filter:alpha(opacity=40); -moz-opacity:0.4; -khtml-opacity:0.4; opacity:0.4; background-color:#000; }
+
+/* 하단 썸네일 - 현재 보여지는 슬라이드의 썸네일만 뚜렷하게, 나머지는 흐리게 표시 */
+.mh_slide_thumbs {
+	display:flex !important;
+	flex-wrap:nowrap;
+	justify-content:center;
+	gap:6px;
+	margin-top:8px !important;
+	overflow-x:auto;
+	padding:2px;
+}
+.mh_slide_thumbs .mh_slide_thumb {
+	flex:0 0 auto;
+	width:72px;
+	height:48px;
+	overflow:hidden;
+	cursor:pointer;
+	border:2px solid transparent;
+	border-radius:3px;
+	opacity:0.45;
+	box-shadow:0 1px 3px rgba(0,0,0,0.25);
+	transition:opacity .2s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+	background:#000;
+}
+.mh_slide_thumbs .mh_slide_thumb:hover {
+	opacity:0.75;
+	transform:translateY(-2px);
+	box-shadow:0 3px 6px rgba(0,0,0,0.3);
+}
+.mh_slide_thumbs .mh_slide_thumb.mh_slide_thumb_active {
+	opacity:1;
+	border-color:#3a7abf;
+	box-shadow:0 0 0 2px rgba(58,122,191,0.35);
+}
+.mh_slide_thumbs .mh_slide_thumb img {
+	display:block !important;
+	width:100% !important;
+	height:100% !important;
+	max-width:none !important;
+	max-height:none !important;
+	margin:0 !important;
+	padding:0 !important;
+	border:none !important;
+	object-fit:fill;
+}
+
+/* 모바일: 슬라이드 가로 크기를 화면 폭 100%로 (세로 비율은 display.html의 인스턴스별 스타일에서 처리) */
+@media (max-width:640px){
+	.mh_slide_outer { width:100% !important; max-width:100% !important; }
+	.mh_slide_thumbs .mh_slide_thumb { width:60px; height:40px; }
+	.mh_slide_wrap .mh_slide_caption { font-size:12px; padding:7px 10px; }
+	.mh_slide_wrap .vui-prev, .mh_slide_wrap .vui-next { width:36px; height:90px; margin-top:-45px; background-size:36px 90px; }
+}

@@ -1,0 +1,75 @@
+<load target="vmc.slider.full.js" />
+<load target="mh_slide.css" />
+
+<style>
+@media (max-width:640px){
+	#mh_slide_outer_{$slide_info->srl}{width:100% !important;max-width:100% !important;}
+	#mh_slide_outer_{$slide_info->srl} .mh_slide_wrap{width:100% !important;height:auto !important;aspect-ratio:{$slide_info->width} / {$slide_info->height} !important;}
+	#mh_slide_outer_{$slide_info->srl} .vui-slider{width:100% !important;height:100% !important;}
+}
+</style>
+
+<div id="mh_slide_outer_{$slide_info->srl}" class="mh_slide_outer mh_slide_align_{$slide_info->align}" style="width:{$slide_info->width}px;{$slide_info->margin_style}">
+	<div class="mh_slide_wrap" style="width:{$slide_info->width}px;height:{$slide_info->height}px;">
+		<div id="mh_slide_{$slide_info->srl}">
+		<!--@foreach($slide_info->slides as $slide)-->
+			<a href="#">
+				<img src="{$slide->src}" alt="" />
+				<!--@if($slide->caption_html)-->
+				<span class="mh_slide_caption">{$slide->caption_html}</span>
+				<!--@end-->
+			</a>
+		<!--@end-->
+		</div>
+	</div>
+	<!--@if($slide_info->show_thumbs)-->
+	<div class="mh_slide_thumbs">
+	<!--@foreach($slide_info->slides as $slide)-->
+		<div class="mh_slide_thumb"><img src="{$slide->src}" alt="" /></div>
+	<!--@end-->
+	</div>
+	<!--@end-->
+</div>
+
+<script>
+jQuery(function($){
+	var $outer = $('#mh_slide_outer_{$slide_info->srl}');
+
+	$('#mh_slide_{$slide_info->srl}').vmcSlider({
+		width: {$slide_info->width},
+		height: {$slide_info->height},
+		gridCol: 10,
+		gridRow: 5,
+		gridVertical: 20,
+		gridHorizontal: 10,
+		autoPlay: {$slide_info->auto_play_js},
+		ascending: {$slide_info->ascending_order_js},
+		effects: [{$slide_info->effects_js}],
+		ie6Tidy: false,
+		random: {$slide_info->random_effect_js},
+		duration: {$slide_info->duration},
+		speed: {$slide_info->speed}
+	});
+
+	// 썸네일 클릭 시 해당 슬라이드로 이동 (플러그인이 만든 dot 버튼을 대신 클릭시켜서 이동)
+	$outer.find('.mh_slide_thumb').on('click', function(){
+		var idx = $(this).index();
+		$outer.find('.vui-buttons .vui-button').eq(idx).trigger('click');
+	});
+
+	// 자동재생/좌우버튼/썸네일 클릭 등 어떤 방식으로 슬라이드가 바뀌어도
+	// 현재 보여지는 이미지의 썸네일만 뚜렷하게, 나머지는 흐리게 표시되도록 동기화
+	function syncActiveThumb() {
+		var curIdx = $outer.find('.vui-buttons .vui-button-cur').index();
+		if (curIdx < 0) return;
+		$outer.find('.mh_slide_thumb').removeClass('mh_slide_thumb_active').eq(curIdx).addClass('mh_slide_thumb_active');
+	}
+
+	var buttonsEl = $outer.find('.vui-buttons')[0];
+	if (buttonsEl && window.MutationObserver) {
+		var mo = new MutationObserver(syncActiveThumb);
+		mo.observe(buttonsEl, { attributes: true, attributeFilter: ['class'], subtree: true });
+	}
+	syncActiveThumb();
+});
+</script>

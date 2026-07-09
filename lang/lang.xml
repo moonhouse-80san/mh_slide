@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<lang>
+	<item name="mh_slide">
+		<value xml:lang="ko"><![CDATA[이미지 슬라이드 제작]]></value>
+		<value xml:lang="en"><![CDATA[Make Image Slide]]></value>
+	</item>
+	<item name="width">
+		<value xml:lang="ko"><![CDATA[가로]]></value>
+		<value xml:lang="en"><![CDATA[Width]]></value>
+	</item>
+	<item name="height">
+		<value xml:lang="ko"><![CDATA[세로]]></value>
+		<value xml:lang="en"><![CDATA[Height]]></value>
+	</item>
+	<item name="image_items">
+		<value xml:lang="ko"><![CDATA[슬라이드 이미지]]></value>
+		<value xml:lang="en"><![CDATA[Slide Images]]></value>
+	</item>
+	<item name="add_item">
+		<value xml:lang="ko"><![CDATA[+ 이미지 추가]]></value>
+		<value xml:lang="en"><![CDATA[+ Add Image]]></value>
+	</item>
+	<item name="add_existing">
+		<value xml:lang="ko"><![CDATA[기존 이미지에서 추가]]></value>
+		<value xml:lang="en"><![CDATA[Add from Existing Images]]></value>
+	</item>
+	<item name="add_selected">
+		<value xml:lang="ko"><![CDATA[선택한 이미지 담기]]></value>
+		<value xml:lang="en"><![CDATA[Add Selected]]></value>
+	</item>
+	<item name="about_existing">
+		<value xml:lang="ko"><![CDATA[이 글에 이미 업로드되어 있는 이미지 중에서 골라서 슬라이드에 추가합니다. Shift+클릭(범위선택), Ctrl+클릭(개별선택)이 가능합니다.]]></value>
+		<value xml:lang="en"><![CDATA[Choose from images already uploaded to this post. Use Shift+click (range) or Ctrl+click (individual) selection.]]></value>
+	</item>
+	<item name="about_image_items">
+		<value xml:lang="ko"><![CDATA["이미지 추가" 버튼을 누르고 이미지를 업로드하면 썸네일이 표시됩니다. 썸네일 아래 입력창에 각 이미지의 캡션(문구)을 입력할 수 있습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Click "Add Image" and upload an image to see its thumbnail. You can enter a caption for each image below its thumbnail.]]></value>
+	</item>
+	<item name="caption_placeholder">
+		<value xml:lang="ko"><![CDATA[캡션 (선택 입력)]]></value>
+		<value xml:lang="en"><![CDATA[Caption (optional)]]></value>
+	</item>
+	<item name="uploading">
+		<value xml:lang="ko"><![CDATA[업로드 중...]]></value>
+		<value xml:lang="en"><![CDATA[Uploading...]]></value>
+	</item>
+	<item name="upload_failed">
+		<value xml:lang="ko"><![CDATA[업로드 실패]]></value>
+		<value xml:lang="en"><![CDATA[Upload failed]]></value>
+	</item>
+	<item name="slide_option">
+		<value xml:lang="ko"><![CDATA[재생 옵션]]></value>
+		<value xml:lang="en"><![CDATA[Playback Options]]></value>
+	</item>
+	<item name="auto_play">
+		<value xml:lang="ko"><![CDATA[자동 재생]]></value>
+		<value xml:lang="en"><![CDATA[Auto Play]]></value>
+	</item>
+	<item name="random_effect">
+		<value xml:lang="ko"><![CDATA[전환효과 랜덤 적용]]></value>
+		<value xml:lang="en"><![CDATA[Random Effects]]></value>
+	</item>
+	<item name="ascending_order">
+		<value xml:lang="ko"><![CDATA[순서대로 재생 (아닐 경우 이미지 랜덤 재생)]]></value>
+		<value xml:lang="en"><![CDATA[Play in order (otherwise images play randomly)]]></value>
+	</item>
+	<item name="show_thumbs">
+		<value xml:lang="ko"><![CDATA[하단 썸네일 표시]]></value>
+		<value xml:lang="en"><![CDATA[Show Thumbnails Below]]></value>
+	</item>
+	<item name="duration">
+		<value xml:lang="ko"><![CDATA[유지 시간(ms)]]></value>
+		<value xml:lang="en"><![CDATA[Duration (ms)]]></value>
+	</item>
+	<item name="align">
+		<value xml:lang="ko"><![CDATA[정렬]]></value>
+		<value xml:lang="en"><![CDATA[Alignment]]></value>
+	</item>
+	<item name="align_left">
+		<value xml:lang="ko"><![CDATA[왼쪽]]></value>
+		<value xml:lang="en"><![CDATA[Left]]></value>
+	</item>
+	<item name="align_center">
+		<value xml:lang="ko"><![CDATA[가운데]]></value>
+		<value xml:lang="en"><![CDATA[Center]]></value>
+	</item>
+	<item name="align_right">
+		<value xml:lang="ko"><![CDATA[오른쪽]]></value>
+		<value xml:lang="en"><![CDATA[Right]]></value>
+	</item>
+	<item name="speed">
+		<value xml:lang="ko"><![CDATA[전환 속도(ms)]]></value>
+		<value xml:lang="en"><![CDATA[Transition Speed (ms)]]></value>
+	</item>
+	<item name="effect_list">
+		<value xml:lang="ko"><![CDATA[전환효과 선택]]></value>
+		<value xml:lang="en"><![CDATA[Transition Effects]]></value>
+	</item>
+	<item name="about_effect_list">
+		<value xml:lang="ko"><![CDATA[사용할 전환효과를 하나 이상 선택하세요. 여러 개를 선택하면 무작위로 섞여 사용됩니다.]]></value>
+		<value xml:lang="en"><![CDATA[Select one or more transition effects. If multiple are selected, they will be mixed at random.]]></value>
+	</item>
+	<item name="effect_all">
+		<value xml:lang="ko"><![CDATA[전체 선택]]></value>
+		<value xml:lang="en"><![CDATA[Select All]]></value>
+	</item>
+	<item name="effect_fade">
+		<value xml:lang="ko"><![CDATA[페이드]]></value>
+		<value xml:lang="en"><![CDATA[Fade]]></value>
+	</item>
+	<item name="effect_fadeLeft">
+		<value xml:lang="ko"><![CDATA[페이드-좌측]]></value>
+		<value xml:lang="en"><![CDATA[Fade Left]]></value>
+	</item>
+	<item name="effect_fadeRight">
+		<value xml:lang="ko"><![CDATA[페이드-우측]]></value>
+		<value xml:lang="en"><![CDATA[Fade Right]]></value>
+	</item>
+	<item name="effect_fadeTop">
+		<value xml:lang="ko"><![CDATA[페이드-상단]]></value>
+		<value xml:lang="en"><![CDATA[Fade Top]]></value>
+	</item>
+	<item name="effect_fadeBottom">
+		<value xml:lang="ko"><![CDATA[페이드-하단]]></value>
+		<value xml:lang="en"><![CDATA[Fade Bottom]]></value>
+	</item>
+	<item name="effect_fadeTopLeft">
+		<value xml:lang="ko"><![CDATA[페이드-좌상단]]></value>
+		<value xml:lang="en"><![CDATA[Fade Top Left]]></value>
+	</item>
+	<item name="effect_fadeBottomRight">
+		<value xml:lang="ko"><![CDATA[페이드-우하단]]></value>
+		<value xml:lang="en"><![CDATA[Fade Bottom Right]]></value>
+	</item>
+	<item name="effect_blindsLeft">
+		<value xml:lang="ko"><![CDATA[블라인드-좌측]]></value>
+		<value xml:lang="en"><![CDATA[Blinds Left]]></value>
+	</item>
+	<item name="effect_blindsRight">
+		<value xml:lang="ko"><![CDATA[블라인드-우측]]></value>
+		<value xml:lang="en"><![CDATA[Blinds Right]]></value>
+	</item>
+	<item name="effect_blindsTop">
+		<value xml:lang="ko"><![CDATA[블라인드-상단]]></value>
+		<value xml:lang="en"><![CDATA[Blinds Top]]></value>
+	</item>
+	<item name="effect_blindsBottom">
+		<value xml:lang="ko"><![CDATA[블라인드-하단]]></value>
+		<value xml:lang="en"><![CDATA[Blinds Bottom]]></value>
+	</item>
+	<item name="effect_blindsTopLeft">
+		<value xml:lang="ko"><![CDATA[블라인드-좌상단]]></value>
+		<value xml:lang="en"><![CDATA[Blinds Top Left]]></value>
+	</item>
+	<item name="effect_blindsBottomRight">
+		<value xml:lang="ko"><![CDATA[블라인드-우하단]]></value>
+		<value xml:lang="en"><![CDATA[Blinds Bottom Right]]></value>
+	</item>
+	<item name="effect_curtainLeft">
+		<value xml:lang="ko"><![CDATA[커튼-좌측]]></value>
+		<value xml:lang="en"><![CDATA[Curtain Left]]></value>
+	</item>
+	<item name="effect_curtainRight">
+		<value xml:lang="ko"><![CDATA[커튼-우측]]></value>
+		<value xml:lang="en"><![CDATA[Curtain Right]]></value>
+	</item>
+	<item name="effect_interlaceLeft">
+		<value xml:lang="ko"><![CDATA[인터레이스-좌측]]></value>
+		<value xml:lang="en"><![CDATA[Interlace Left]]></value>
+	</item>
+	<item name="effect_interlaceRight">
+		<value xml:lang="ko"><![CDATA[인터레이스-우측]]></value>
+		<value xml:lang="en"><![CDATA[Interlace Right]]></value>
+	</item>
+	<item name="effect_mosaic">
+		<value xml:lang="ko"><![CDATA[모자이크]]></value>
+		<value xml:lang="en"><![CDATA[Mosaic]]></value>
+	</item>
+	<item name="effect_bomb">
+		<value xml:lang="ko"><![CDATA[폭발]]></value>
+		<value xml:lang="en"><![CDATA[Bomb]]></value>
+	</item>
+	<item name="effect_fumes">
+		<value xml:lang="ko"><![CDATA[연기]]></value>
+		<value xml:lang="en"><![CDATA[Fumes]]></value>
+	</item>
+</lang>

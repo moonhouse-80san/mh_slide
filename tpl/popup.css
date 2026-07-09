@@ -1,0 +1,233 @@
+@charset "UTF-8";
+div.xe_mobile {
+	display:none!important;
+}
+
+#popBody { padding: 10px 0; }
+
+.adminTable { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.adminTable th {
+	text-align: left;
+	padding: 7px 10px;
+	background: #f5f5f5;
+	border: 1px solid #ddd;
+	font-weight: 600;
+	white-space: nowrap;
+	vertical-align: top;
+}
+.adminTable td {
+	padding: 7px 10px;
+	border: 1px solid #ddd;
+	vertical-align: middle;
+}
+
+.inputTypeText {
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding: 4px 6px;
+	font-size: 13px;
+}
+
+/* 라디오/체크박스를 가로로 나란히 배치하는 공통 그룹 */
+.mh_slide_inline_group {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px 18px;
+}
+.mh_slide_inline_group label {
+	white-space: nowrap;
+	font-weight: normal;
+	margin: 2px 0;
+}
+
+.mh_slide_effect_list {
+	max-height:180px;
+	overflow-y:auto;
+	border:1px solid #ddd;
+	padding:6px 10px;
+	background:#fff;
+}
+.mh_slide_effect_all_row {
+	display: block;
+	margin-bottom: 4px;
+	padding-bottom: 4px;
+	border-bottom: 1px solid #eee;
+}
+.mh_slide_effect_items {
+	gap: 4px 14px;
+}
+.mh_slide_effect_items label {
+	display: inline-flex;
+	align-items: center;
+	white-space: nowrap;
+	font-weight: normal;
+}
+.mh_slide_upload_status {
+	margin-left:8px;
+	font-size:12px;
+	color:#666;
+}
+.mh_slide_upload_status.error {
+	color:#c00;
+}
+.mh_slide_upload_status.done {
+	color:#2c8a2c;
+}
+.mh_slide_help_text {
+	margin-top: 4px;
+	font-size: 12px;
+	color: #999;
+}
+
+/* 이미지 항목 추가 버튼 */
+#btn-add-item {
+	display: inline-block;
+	padding: 6px 14px;
+	border-radius: 3px;
+	border: 1px solid #3a7abf;
+	background: #eaf2fb;
+	color: #2e6da4;
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+}
+#btn-add-item:hover { background: #dcebfa; }
+
+#btn-add-existing {
+	display: inline-block;
+	margin-left: 6px;
+	padding: 6px 14px;
+	border-radius: 3px;
+	border: 1px solid #bbb;
+	background: #f5f5f5;
+	color: #333;
+	font-size: 13px;
+	cursor: pointer;
+}
+#btn-add-existing:hover { background: #ececec; }
+
+.mh_slide_existing_panel {
+	margin-top: 10px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	background: #fafafa;
+}
+.mh_slide_existing_select {
+	width: 100%;
+	box-sizing: border-box;
+	margin-bottom: 6px;
+}
+.mh_slide_existing_panel button {
+	padding: 5px 12px;
+	border-radius: 3px;
+	border: 1px solid #3a7abf;
+	background: #eaf2fb;
+	color: #2e6da4;
+	font-size: 12px;
+	cursor: pointer;
+}
+.mh_slide_existing_panel button:hover { background: #dcebfa; }
+
+/* 이미지 항목 목록 */
+.mh_slide_item_list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 10px;
+}
+.mh_slide_item {
+	position: relative;
+	width: 150px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 8px;
+	background: #fafafa;
+	box-sizing: border-box;
+}
+.mh_slide_item .item-thumb {
+	position: relative;
+	width: 100%;
+	height: 90px;
+	border-radius: 3px;
+	overflow: hidden;
+	background: #eee repeating-linear-gradient(45deg, #eee, #eee 10px, #f5f5f5 10px, #f5f5f5 20px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.mh_slide_item .item-thumb img {
+	display: none;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.mh_slide_item .item-thumb.has-image img { display: block; }
+.mh_slide_item .item-thumb input[type="file"] {
+	font-size: 11px;
+	max-width: 130px;
+}
+.mh_slide_item .item-status {
+	font-size: 11px;
+	color: #666;
+	text-align: center;
+	margin-top: 2px;
+	min-height: 14px;
+}
+.mh_slide_item .item-status.error { color: #c00; }
+.mh_slide_item .item-caption {
+	width: 100%;
+	box-sizing: border-box;
+	margin-top: 6px;
+	padding: 4px 6px;
+	font-size: 12px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.mh_slide_item .btn-del-item {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	width: 20px;
+	height: 20px;
+	line-height: 18px;
+	text-align: center;
+	border-radius: 50%;
+	border: none;
+	background: rgba(0,0,0,0.55);
+	color: #fff;
+	font-size: 13px;
+	cursor: pointer;
+	padding: 0;
+	z-index: 2;
+}
+.mh_slide_item .btn-del-item:hover { background: #c00; }
+.mh_slide_item .btn-reupload {
+	position: absolute;
+	bottom: 4px;
+	right: 4px;
+	font-size: 10px;
+	padding: 2px 5px;
+	border: none;
+	border-radius: 3px;
+	background: rgba(0,0,0,0.55);
+	color: #fff;
+	cursor: pointer;
+	z-index: 2;
+}
+
+/* 버튼 영역 */
+.btnArea { padding: 10px 0 0; }
+.x_btn { display: inline-block; padding: 5px 14px; border-radius: 3px; border: 1px solid #bbb; background: #f5f5f5; cursor: pointer; font-size: 13px; text-decoration: none; color: #333; }
+.x_btn-primary { background: #3a7abf; color: #fff; border-color: #2e6da4; }
+.x_pull-right { float: right; }
+.x_clearfix::after { content: ''; display: block; clear: both; }
+
+@media (max-width: 520px) {
+	.adminTable, .adminTable tbody, .adminTable tr, .adminTable th, .adminTable td {
+		display: block;
+		width: auto !important;
+	}
+	.adminTable th { white-space: normal; border-bottom: none; }
+}
