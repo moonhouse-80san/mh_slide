@@ -139,12 +139,41 @@ div.xe_mobile {
 }
 .mh_slide_item {
 	position: relative;
-	width: 150px;
+	width: 145px;
 	border: 1px solid #ddd;
 	border-radius: 4px;
 	padding: 8px;
 	background: #fafafa;
 	box-sizing: border-box;
+	transition: opacity .15s, border-color .15s;
+}
+.mh_slide_item.dragging {
+	opacity: .4;
+}
+.mh_slide_item.drag-over-before {
+	box-shadow: inset 3px 0 0 #3a7abf;
+}
+.mh_slide_item.drag-over-after {
+	box-shadow: inset -3px 0 0 #3a7abf;
+}
+.mh_slide_item .item-drag-handle {
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	width: 20px;
+	height: 20px;
+	line-height: 18px;
+	text-align: center;
+	border-radius: 3px;
+	background: rgba(0,0,0,0.55);
+	color: #fff;
+	font-size: 13px;
+	cursor: grab;
+	z-index: 2;
+	user-select: none;
+}
+.mh_slide_item .item-drag-handle:active {
+	cursor: grabbing;
 }
 .mh_slide_item .item-thumb {
 	position: relative;

@@ -4,6 +4,14 @@
 <style>
 #mh_slide_outer_{$slide_info->srl} .vui-item img { object-fit:{$slide_info->object_fit} !important; }
 #mh_slide_outer_{$slide_info->srl} .vui-item { background:transparent; }
+<!--@if($slide_info->show_thumbs)-->
+#mh_slide_outer_{$slide_info->srl} .vui-buttons { display:none !important; }
+<!--@end-->
+<!--@if($slide_info->full_width)-->
+#mh_slide_outer_{$slide_info->srl}{width:100% !important;max-width:100% !important;}
+#mh_slide_outer_{$slide_info->srl} .mh_slide_wrap{width:100% !important;height:auto !important;aspect-ratio:{$slide_info->width} / {$slide_info->height} !important;}
+#mh_slide_outer_{$slide_info->srl} .vui-slider{width:100% !important;height:100% !important;}
+<!--@end-->
 @media (max-width:640px){
 	#mh_slide_outer_{$slide_info->srl}{width:100% !important;max-width:100% !important;}
 	#mh_slide_outer_{$slide_info->srl} .mh_slide_wrap{width:100% !important;height:auto !important;aspect-ratio:{$slide_info->width} / {$slide_info->height} !important;}
@@ -15,8 +23,12 @@
 	<div class="mh_slide_wrap" style="width:{$slide_info->width}px;height:{$slide_info->height}px;">
 		<div id="mh_slide_{$slide_info->srl}">
 		<!--@foreach($slide_info->slides as $slide)-->
-			<a href="#">
-				<img src="{$slide->src}" alt="" />
+			<!-- prettyPhoto 애드온이 자동으로 처리하는 방식(너비/높이 기준 검사)은 숨겨진(비활성) 슬라이드에는
+			     적용되지 않으므로(display:none 상태라 크기가 0으로 측정됨), rel/href를 직접 지정하고
+			     img에는 no_pp를 줘서 애드온의 자동 랩핑 로직을 건너뛰게 한다.
+			     (애드온은 rel="prettyPhoto..." 로 시작하는 앵커를 찾아 뷰어를 바인딩하므로, 직접 지정해도 정상 작동) -->
+			<a href="{$slide->src}" rel="prettyPhoto[mh_slide_{$slide_info->srl}]">
+				<img src="{$slide->src}" alt="" class="no_pp" />
 				<!--@if($slide->caption_html)-->
 				<span class="mh_slide_caption">{$slide->caption_html}</span>
 				<!--@end-->
@@ -27,7 +39,7 @@
 	<!--@if($slide_info->show_thumbs)-->
 	<div class="mh_slide_thumbs">
 	<!--@foreach($slide_info->slides as $slide)-->
-		<div class="mh_slide_thumb"><img src="{$slide->src}" alt="" /></div>
+		<div class="mh_slide_thumb"><img src="{$slide->src}" alt="" class="no_pp" /></div>
 	<!--@end-->
 	</div>
 	<!--@end-->
@@ -36,6 +48,10 @@
 <script>
 jQuery(function($){
 	var $outer = $('#mh_slide_outer_{$slide_info->srl}');
+
+	// 모바일(가로 640px 이하) 화면에서는 성능/터치 환경을 고려해 전환효과 없이 즉시 전환되도록 처리
+	var is_mobile = window.matchMedia && window.matchMedia('(max-width:640px)').matches;
+	var effects_list = is_mobile ? [] : [{$slide_info->effects_js}];
 
 	$('#mh_slide_{$slide_info->srl}').vmcSlider({
 		width: {$slide_info->width},
@@ -46,7 +62,7 @@ jQuery(function($){
 		gridHorizontal: 10,
 		autoPlay: {$slide_info->auto_play_js},
 		ascending: {$slide_info->ascending_order_js},
-		effects: [{$slide_info->effects_js}],
+		effects: effects_list,
 		ie6Tidy: false,
 		random: {$slide_info->random_effect_js},
 		duration: {$slide_info->duration},

@@ -70,7 +70,6 @@ class mh_slide extends EditorHandler
 
 		$effects_list = explode(',', trim($xml_obj->attrs->effects));
 		$effects_list = array_intersect($effects_list, $this->allowed_effects);
-		if (!count($effects_list)) $effects_list = array('fade');
 		$slide_info->effects_js = implode(',', array_map(function($e) {
 			return "'".$e."'";
 		}, $effects_list));
@@ -129,21 +128,28 @@ class mh_slide extends EditorHandler
 			return implode('<br />', $output);
 		}
 
-		// 가로/세로 크기 계산: 둘 다 입력되어 있으면 그 크기 그대로(늘려서 채움),
-		// 하나만 입력되어 있으면 실제 이미지 비율로 나머지 값을 자동 계산(찌그러짐 없이 표시)
+		// 가로/세로 크기 계산:
+		// - 둘 다 입력 → 지정한 크기 그대로 채움
+		// - 하나만 입력 → 실제 이미지 비율로 나머지 값을 자동 계산(찌그러짐 없이 표시)
+		// - 둘 다 비움 → 가로 100%(반응형)로 출력, 비율은 첫 번째 이미지의 실제 가로세로 비율을 사용
 		$raw_width = trim((string)$xml_obj->attrs->mh_width);
 		$raw_height = trim((string)$xml_obj->attrs->mh_height);
 		$given_width = ($raw_width !== '' && (int)$raw_width > 0) ? (int)$raw_width : null;
 		$given_height = ($raw_height !== '' && (int)$raw_height > 0) ? (int)$raw_height : null;
 
+		$slide_info->full_width = false;
+
 		if ($given_width === null && $given_height === null)
 		{
-			// 아무 것도 입력 안 되어 있으면 기존 기본값
-			$given_width = 800;
-			$given_height = 460;
+			// 둘 다 비움 → 가로 100% 반응형 모드. 비율(width:height)만 첫 이미지 실제 크기 기준으로 계산
+			// (실제 표시 가로폭은 화면/영역 크기에 따라 달라지므로, 여기서는 종횡비만 결정한다)
+			$ratio_size = !empty($slide_info->slides) ? $this->_getImageSize($slide_info->slides[0]->src) : null;
+			$slide_info->width = $ratio_size ? $ratio_size[0] : 800;
+			$slide_info->height = $ratio_size ? $ratio_size[1] : 460;
+			$slide_info->object_fit = 'contain';
+			$slide_info->full_width = true;
 		}
-
-		if ($given_width !== null && $given_height === null)
+		elseif ($given_width !== null && $given_height === null)
 		{
 			// 가로만 지정 → 세로는 실제 이미지 비율대로 자동 계산 (가장 큰 값 기준)
 			$max_height = 0;
@@ -179,6 +185,15 @@ class mh_slide extends EditorHandler
 			$slide_info->object_fit = 'fill';
 		}
 		$slide_info->contain_mode_js = ($slide_info->object_fit === 'contain') ? 'true' : 'false';
+
+		if ($slide_info->object_fit === 'contain')
+		{
+			// 가로/세로 자동계산 모드 및 가로100% 반응형 모드에서는, 그리드 조각 기반 전환효과가
+			// 고정 px 크기를 기준으로 위치를 계산하기 때문에 실제 표시 크기와 어긋나 보일 수 있다.
+			// 이런 경우에는 전환효과 목록을 비워서(슬라이더 플러그인이 자체적으로 지원하는 방식으로)
+			// 애니메이션 없이 즉시 다음 이미지로 전환되도록 처리한다.
+			$slide_info->effects_js = '';
+		}
 
 		Context::set('slide_info', $slide_info);
 

@@ -222,20 +222,13 @@
 			node = the.node,
 			opts = the.options;
 		the.url = node.item.eq(the.index).find('img')[0].src;
-		if (opts.containMode) {
-			// 가로/세로 자동계산(원본 비율 유지) 모드에서는 배경이미지를 늘려서 그리드를 그리면
-			// 실제 이미지 표시 방식(object-fit:contain)과 어긋나 순간적으로 눌려 보이므로,
-			// 전환효과 중에는 배경을 비워서 다음 이미지로 투명하게(자연스럽게) 넘어가도록 처리
-			node.transfer.html(the.stageHtml[stage]).show().children().css({
-				backgroundImage: 'none'
-			});
-		} else {
-			node.transfer.html(the.stageHtml[stage]).show().children().css({
-				backgroundImage: 'url(' + the.url + ')',
-				backgroundSize: opts.width + 'px ' + opts.height + 'px',
-				backgroundRepeat: 'no-repeat'
-			});
-		}
+		// 원본 비율 유지(auto-size/가로100%) 모드에서도 전환효과 중에 실제 이미지가 보이도록
+		// 일반 모드와 동일하게 배경이미지를 채워서 그리드를 그린다 (선택한 전환효과가 그대로 보이게 함)
+		node.transfer.html(the.stageHtml[stage]).show().children().css({
+			backgroundImage: 'url(' + the.url + ')',
+			backgroundSize: opts.width + 'px ' + opts.height + 'px',
+			backgroundRepeat: 'no-repeat'
+		});
 	};
 	//**************************************************************************************************************
 	// 上一张

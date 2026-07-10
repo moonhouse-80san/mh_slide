@@ -102,7 +102,8 @@
 			<tr>
 				<th scope="row">{$lang->image_items}</th>
 				<td colspan="3">
-					<button type="button" id="btn-add-item" onclick="addImageItem()">{$lang->add_item}</button>
+					<button type="button" id="btn-add-item" onclick="get_by_id('add-item-file-input').click()">{$lang->add_item}</button>
+					<input type="file" id="add-item-file-input" accept="image/*" multiple="true" style="display:none" onchange="handleMultiFileSelect(this)" />
 					<button type="button" id="btn-add-existing" onclick="toggleExistingPanel()">{$lang->add_existing}</button>
 					<div id="existing-panel" class="mh_slide_existing_panel" style="display:none;">
 						<select id="existing_image_select" size="6" multiple="true" class="mh_slide_existing_select"></select>
@@ -111,6 +112,8 @@
 					</div>
 					<div id="item-list" class="mh_slide_item_list"></div>
 					<div class="mh_slide_help_text">{$lang->about_image_items}</div>
+					<div class="mh_slide_help_text">{$lang->about_multi_select}</div>
+					<div class="mh_slide_help_text">{$lang->about_reorder}</div>
 				</td>
 			</tr>
 		</table>
