@@ -383,6 +383,7 @@ function getMhSlide() {
 		get_by_id('random_effect').checked = ($node.attr('random_effect') != 'N');
 		get_by_id('ascending_order').checked = ($node.attr('ascending_order') != 'N');
 		get_by_id('show_thumbs').checked = ($node.attr('show_thumbs') != 'N');
+		get_by_id('responsive_effect').checked = ($node.attr('responsive_effect') == 'Y');
 		get_by_id('duration').value = $node.attr('duration') || 2000;
 		get_by_id('speed').value = $node.attr('speed') || 1500;
 
@@ -452,6 +453,7 @@ function insertMhSlide() {
 	var random_effect = get_by_id("random_effect").checked ? "Y" : "N";
 	var ascending_order = get_by_id("ascending_order").checked ? "Y" : "N";
 	var show_thumbs = get_by_id("show_thumbs").checked ? "Y" : "N";
+	var responsive_effect = get_by_id("responsive_effect").checked ? "Y" : "N";
 	var duration = get_by_id("duration").value || 2000;
 	var speed = get_by_id("speed").value || 1500;
 
@@ -480,6 +482,7 @@ function insertMhSlide() {
 		selected_node.setAttribute("random_effect", random_effect);
 		selected_node.setAttribute("ascending_order", ascending_order);
 		selected_node.setAttribute("show_thumbs", show_thumbs);
+		selected_node.setAttribute("responsive_effect", responsive_effect);
 		selected_node.setAttribute("duration", duration);
 		selected_node.setAttribute("speed", speed);
 		selected_node.setAttribute("effects", effect_list);
@@ -504,6 +507,7 @@ function insertMhSlide() {
 		var text = "<img src=\"" + preview_src + "\" editor_component=\"mh_slide\""
 			+ " mh_width=\"" + width + "\" mh_height=\"" + height + "\""
 			+ " auto_play=\"" + auto_play + "\" random_effect=\"" + random_effect + "\" ascending_order=\"" + ascending_order + "\" show_thumbs=\"" + show_thumbs + "\""
+			+ " responsive_effect=\"" + responsive_effect + "\""
 			+ " duration=\"" + duration + "\" speed=\"" + speed + "\" effects=\"" + effect_list + "\""
 			+ " mh_slides=\"" + escapeAttr(slides_json) + "\" mh_align=\"" + align + "\""
 			+ " style=\"display:block;width:" + preview_width_style + ";height:" + preview_height + "px;border:2px dotted #4371B9;"

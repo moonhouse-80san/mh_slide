@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component version="1.0">
+<component version="1.1">
     <title xml:lang="ko">이미지 슬라이드</title>
     <title xml:lang="en">Image Slide</title>
     <description xml:lang="ko">업로드한 이미지로 다양한 전환효과의 슬라이드쇼를 만듭니다.</description>
     <description xml:lang="en">Create a slideshow with various transition effects using uploaded images.</description>
-    <version>0.1</version>
-    <date>2026-07-08</date>
+    <version>1.1</version>
+    <date>2026-07-12</date>
 
     <author email_address="80san@moonhouse.co.kr" link="https://moonhouse.co.kr/">
         <name xml:lang="ko">팔공산</name>

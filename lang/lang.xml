@@ -13,8 +13,8 @@
 		<value xml:lang="en"><![CDATA[Height]]></value>
 	</item>
 	<item name="about_size">
-		<value xml:lang="ko"><![CDATA[가로/세로 중 한쪽만 비워두면, 입력한 값을 기준으로 각 이미지의 원본 비율에 맞게 나머지 값이 자동으로 계산됩니다 (찌그러짐 없이 표시). 둘 다 비워두면 가로 100%(반응형)로 출력되며, 첫 번째 이미지의 비율에 맞춰 세로 높이가 자동 조정됩니다. 단, 이 경우 전환효과는 무시됩니다.]]></value>
-		<value xml:lang="en"><![CDATA[Leave only one of width/height blank to auto-calculate it from each image's own aspect ratio, based on the value you entered (no distortion). Leave both blank to output at 100% width (responsive), with the height auto-adjusted to match the first image's ratio. Note: in these modes only the "Fade" transition is used; other effects are ignored.]]></value>
+		<value xml:lang="ko"><![CDATA[가로/세로 중 한쪽만 비워두면, 입력한 값을 기준으로 각 이미지의 원본 비율에 맞게 나머지 값이 자동으로 계산됩니다 (찌그러짐 없이 표시). 둘 다 비워두면 가로 100%(반응형)로 출력되며, 첫 번째 이미지의 비율에 맞춰 세로 높이가 자동 조정됩니다. 이 경우 기본적으로 전환효과는 무시되며, 아래 "반응형/모바일에서도 전환효과 사용" 옵션을 켜면 적용할 수 있습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Leave only one of width/height blank to auto-calculate it from each image's own aspect ratio, based on the value you entered (no distortion). Leave both blank to output at 100% width (responsive), with the height auto-adjusted to match the first image's ratio. Transition effects are ignored by default in this mode; enable "Enable Transition Effects in Responsive/Mobile Mode" below to apply them anyway.]]></value>
 	</item>
 	<item name="image_items">
 		<value xml:lang="ko"><![CDATA[슬라이드 이미지]]></value>
@@ -80,6 +80,14 @@
 		<value xml:lang="ko"><![CDATA[하단 썸네일 표시]]></value>
 		<value xml:lang="en"><![CDATA[Show Thumbnails Below]]></value>
 	</item>
+	<item name="responsive_effect">
+		<value xml:lang="ko"><![CDATA[반응형/모바일에서도 전환효과 사용]]></value>
+		<value xml:lang="en"><![CDATA[Enable Transition Effects in Responsive/Mobile Mode]]></value>
+	</item>
+	<item name="about_responsive_effect">
+		<value xml:lang="ko"><![CDATA[기본적으로 반응형(가로/세로 모두 비움) 모드나 모바일 화면에서는 전환효과가 꺼져 있습니다. 이 옵션을 켜면 화면 크기에 맞춰 전환효과 전체를 자동으로 축소/확대해서 보여주므로, 어떤 화면 크기에서도 어긋남 없이 정확하게 표시됩니다. (다만 이미지 개수가 많거나 저사양 모바일 기기에서는 효과 없이 즉시 전환하는 쪽이 더 가벼울 수 있어 기본값은 꺼짐으로 되어 있습니다.)]]></value>
+		<value xml:lang="en"><![CDATA[By default, transition effects are disabled in responsive mode (both width/height left blank) and on mobile screens. Enabling this option automatically scales the entire effect to fit the current screen size, so it renders correctly with no misalignment on any screen. (The default is off mainly because instant, effect-free transitions are lighter-weight on low-end mobile devices or with many images.)]]></value>
+	</item>
 	<item name="duration">
 		<value xml:lang="ko"><![CDATA[유지 시간(ms)]]></value>
 		<value xml:lang="en"><![CDATA[Duration (ms)]]></value>
@@ -109,8 +117,8 @@
 		<value xml:lang="en"><![CDATA[Transition Effects]]></value>
 	</item>
 	<item name="about_effect_list">
-		<value xml:lang="ko"><![CDATA[사용할 전환효과를 선택하세요. 여러 개를 선택하면 무작위로 섞여 사용되고, 하나도 선택하지 않으면 애니메이션 없이 즉시 다음 이미지로 전환됩니다. 반응형이나 모바일에서는 전환효과 작동하지 않습니다.]]></value>
-		<value xml:lang="en"><![CDATA[Select the transition effects to use. If multiple are selected, they will be mixed at random; if none are selected, images switch instantly with no animation.]]></value>
+		<value xml:lang="ko"><![CDATA[사용할 전환효과를 선택하세요. 여러 개를 선택하면 무작위로 섞여 사용되고, 하나도 선택하지 않으면 애니메이션 없이 즉시 다음 이미지로 전환됩니다. 반응형이나 모바일에서는 기본적으로 전환효과가 작동하지 않으며, 위 "반응형/모바일에서도 전환효과 사용" 옵션을 켜면 적용됩니다.]]></value>
+		<value xml:lang="en"><![CDATA[Select the transition effects to use. If multiple are selected, they will be mixed at random; if none are selected, images switch instantly with no animation. Effects are disabled by default in responsive mode or on mobile; enable "Enable Transition Effects in Responsive/Mobile Mode" above to apply them there as well.]]></value>
 	</item>
 	<item name="effect_all">
 		<value xml:lang="ko"><![CDATA[전체 선택]]></value>

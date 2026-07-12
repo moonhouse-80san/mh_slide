@@ -50,6 +50,7 @@ class mh_slide extends EditorHandler
 		$slide_info->show_thumbs = ($xml_obj->attrs->show_thumbs === 'N') ? false : true;
 		$slide_info->random_effect_js = ($xml_obj->attrs->random_effect === 'N') ? 'false' : 'true';
 		$slide_info->ascending_order_js = ($xml_obj->attrs->ascending_order === 'N') ? 'false' : 'true';
+		$slide_info->responsive_effect_js = ($xml_obj->attrs->responsive_effect === 'Y') ? 'true' : 'false';
 
 		$slide_info->duration = (int)$xml_obj->attrs->duration;
 		if (!$slide_info->duration) $slide_info->duration = 2000;
@@ -186,12 +187,13 @@ class mh_slide extends EditorHandler
 		}
 		$slide_info->contain_mode_js = ($slide_info->object_fit === 'contain') ? 'true' : 'false';
 
-		if ($slide_info->object_fit === 'contain')
+		if ($slide_info->object_fit === 'contain' && $xml_obj->attrs->responsive_effect !== 'Y')
 		{
 			// 가로/세로 자동계산 모드 및 가로100% 반응형 모드에서는, 그리드 조각 기반 전환효과가
 			// 고정 px 크기를 기준으로 위치를 계산하기 때문에 실제 표시 크기와 어긋나 보일 수 있다.
 			// 이런 경우에는 전환효과 목록을 비워서(슬라이더 플러그인이 자체적으로 지원하는 방식으로)
 			// 애니메이션 없이 즉시 다음 이미지로 전환되도록 처리한다.
+			// (단, 팝업의 "반응형/모바일에서도 전환효과 사용" 옵션이 켜져 있으면 이 제한을 건너뛴다.)
 			$slide_info->effects_js = '';
 		}
 
