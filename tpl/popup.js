@@ -284,6 +284,18 @@ function uploadItemFile(file, wrap, img, thumb, fileInput, reBtn, status, callba
 				if (callback) callback();
 				return;
 			}
+			// 새 글 작성 중(= 아직 document_srl이 없는 상태)의 첫 업로드에서는 서버가 upload_target_srl을
+			// 새로 채번한다. 이 값을 부모 글쓰기 폼의 document_srl 히든필드에 동기화해주지 않으면,
+			// 실제 저장 시 서버가 전혀 다른 document_srl을 다시 채번하게 되어 업로드한 파일과 글이
+			// 영영 연결되지 못한다(첨부 목록 미표시, 글 삭제 시 파일 미삭제의 원인).
+			// Rhymix 표준 첨부 UI(jquery.fileupload)가 하는 동기화와 동일한 처리.
+			try {
+				var editor_sequence = fo.editor_sequence.value;
+				if (data.upload_target_srl && opener.editorRelKeys && opener.editorRelKeys[editor_sequence] && opener.editorRelKeys[editor_sequence].primary) {
+					opener.editorRelKeys[editor_sequence].primary.value = data.upload_target_srl;
+				}
+			} catch (e) { /* 부모 창 접근 실패 시 무시(팝업 차단 등) */ }
+
 			var src = data.download_url.replace(request_uri, '');
 			// 같은 카드에 이미 업로드되어 있던 파일이 있다면(재업로드로 교체하는 경우), 기존 파일은 에디터에서 정리
 			var old_file_srl = wrap.getAttribute('data-file-srl');
